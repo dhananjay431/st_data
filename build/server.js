@@ -50,6 +50,11 @@ var port = process.env.PORT || 3000;
 var hostUrl = process.env.HOST_URL || "http://localhost:" + port;
 var nseIndia = new index_1.NseIndia();
 var openapiSpecification = swagger_jsdoc_1.default(swaggerDocOptions_1.swaggerDocOptions);
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(openapiSpecification));
 /**
  * @openapi
